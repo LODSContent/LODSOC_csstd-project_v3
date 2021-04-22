@@ -32,7 +32,7 @@
         clearResults();
         var sqlConnection = "connectionString=" + encodeURIComponent($('#sqlConnection').val()) + "&tableName=customers";
         var mysqlConnection = "connectionString=" + encodeURIComponent($('#mysqlConnection').val()) + "&tableName=vendors";
-        //Note: There was a race condition with Entity framework when running SQL and MySQL.  If both run (advanced or expert), they will run in series with MySQL running after SQL Server
+           //Note: There was a race condition with Entity framework when running SQL and MySQL.  If both run (advanced or expert), they will run in series with MySQL running after SQL Server
         if ((testType & 4) === 4) {
             runTest("sqlupload", sqlConnection, "SQL Server Upload", null, null, processDataResults, false);
             runTest("sqldownload", sqlConnection, "SQL Server Download", ["ID", "Name", "PostalCode"], ["ID", "Customer Name", "Postal Code"], processDataResults, true);
@@ -98,7 +98,7 @@
 
     }
     function processError(errorInfo, title) {
-        var text = errorInfo.statusText ?? errorInfo;
+        var text = errorInfo.statusText || errorInfo;
         var result = "<tr><td>Error</td><td><h3>" + title + "</h3><p>" + text + "</p></td></tr>";
         $('#results').append(result);
     }
